@@ -7,11 +7,12 @@ function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [message, setMessage] = useState('');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        // Add your authentication logic here
+        // Simple validation
         if (!email || !password) {
             setError("Email and password are required!");
             return;
@@ -86,11 +87,18 @@ function Login() {
             cursor: 'pointer',
             fontSize: '16px',
         },
-        buttonHover: {
-            backgroundColor: '#0056b3',
-        },
         error: {
             color: 'red',
+            marginBottom: '15px',
+            textAlign: 'center',
+        },
+        successMessage: {
+            color: 'green', // Message for successful login
+            marginBottom: '15px',
+            textAlign: 'center',
+        },
+        failureMessage: {
+            color: 'red', // Message for failed login
             marginBottom: '15px',
             textAlign: 'center',
         },
@@ -103,6 +111,11 @@ function Login() {
         <div style={styles.container}>
             <h2 style={styles.heading}>Log In</h2>
             {error && <div style={styles.error}>{error}</div>}
+            {message && (
+                <div style={message.includes("failed") ? styles.failureMessage : styles.successMessage}>
+                    {message}
+                </div>
+            )}
             <form onSubmit={handleSubmit}>
                 <div style={styles.formGroup}>
                     <label htmlFor="email" style={styles.label}>Email:</label>

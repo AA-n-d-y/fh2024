@@ -8,6 +8,7 @@ function SignUp() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
+    const [message, setMessage] = useState('');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -94,6 +95,11 @@ function SignUp() {
             marginBottom: '15px',
             textAlign: 'center',
         },
+        message: {
+            color: 'green',
+            marginBottom: '15px',
+            textAlign: 'center',
+        },
         paragraph: {
             textAlign: 'center',
         },
@@ -105,6 +111,7 @@ function SignUp() {
                 <div className="col-md-4" style={styles.container}>
                     <h2 style={styles.heading}>Create Account</h2>
                     {error && <div style={styles.error}>{error}</div>}
+                    {message && <div style={styles.message}>{message}</div>}
                     <form onSubmit={handleSubmit}>
                         <div style={styles.formGroup}>
                             <label htmlFor="username" style={styles.label}>Username:</label>
