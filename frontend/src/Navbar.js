@@ -13,13 +13,14 @@ function Navbar() {
         </div>
             <ul className="navbar-nav">
                 <li className="nav-item">
-                    <Link to="/" className="nav-link" >HOME</Link>
+                    <Link to="/" className="nav-link">HOME</Link>
                 </li>
                 <li className="nav-item">
                     <Link to="/payments" className="nav-link">PAYMENTS</Link>
                 </li>
                 <li>
                     <Link to="/login" className="nav-link">LOGIN</Link>
+                    {/* test */}
                 </li>
             </ul>
         </div>
