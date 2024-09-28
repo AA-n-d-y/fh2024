@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
-import { NavLink, redirect, useHistory } from 'react-router-dom';
-
+import React, { useEffect, useState } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
 
 function Login() {
     const navigate = useHistory();
+    const location = useLocation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
+
+    useEffect(() => {
+        // Check if teleportDetails were passed and display them
+        const { teleportDetails } = location.state || {};
+        if (teleportDetails) {
+            alert(`Teleport Details: ${JSON.stringify(teleportDetails)}`); // Show pop-up with teleport details
+        }
+    }, [location.state]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -19,33 +27,25 @@ function Login() {
         }
 
         setError('');
-        // Here you can add code to send the data to the server
-        // e.g., using fetch() or axios
-
         try {
-            const res = await fetch("http://localhost:8080" + "/login", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-            },
-              body: 
-                JSON.stringify({
-                  email: email,
-                  password: password
-                })
+            const res = await fetch("http://localhost:8080/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email, password }),
             });
-    
+
             // If the login is successful, redirect the user to the home page
-            if (res.status == 200) {
+            if (res.status === 200) {
                 navigate.push("/");
+            } else {
+                setError("Email or password is incorrect");
             }
-            // Else, display an error
-            else {
-              setError("Email or password is incorrect");
-            }
+        } catch (error) {
+            console.error("Login error:", error);
+            setError("An error occurred. Please try again.");
         }
-          
-        catch (error) {}
     };
 
     const styles = {
@@ -93,12 +93,12 @@ function Login() {
             textAlign: 'center',
         },
         successMessage: {
-            color: 'green', // Message for successful login
+            color: 'green',
             marginBottom: '15px',
             textAlign: 'center',
         },
         failureMessage: {
-            color: 'red', // Message for failed login
+            color: 'red',
             marginBottom: '15px',
             textAlign: 'center',
         },
