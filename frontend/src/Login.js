@@ -12,7 +12,7 @@ function Login() {
 
     const handleLogin = async () => {
         try {
-            const res = await fetch("http://localhost:8080" + "/getLoggedIn", {
+            const res = await fetch("http://localhost:8080" + "/getLogin", {
               method: "GET"
             });
     
