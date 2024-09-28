@@ -6,8 +6,9 @@ function SignUp() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
+    const [message, setMessage] = useState('');
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         if (password !== confirmPassword) {
@@ -16,9 +17,28 @@ function SignUp() {
         }
 
         setError('');
-        alert("Sign up successful!");
-        // Here you can add code to send the data to the server
-        // e.g., using fetch() or axios
+        
+        // Simulate signup processing
+        const signupSuccessful = await simulateSignup();
+
+        if (signupSuccessful) {
+            setMessage("Sign up successful!");
+            // Reset the form fields
+            setUsername('');
+            setEmail('');
+            setPassword('');
+            setConfirmPassword('');
+        } else {
+            setMessage("Sign up failed. Please try again.");
+        }
+    };
+
+    // Simulate signup processing
+    const simulateSignup = () => {
+        return new Promise((resolve) => {
+            const isSuccess = Math.random() > 0.3; // 70% chance of success
+            setTimeout(() => resolve(isSuccess), 1000); // Simulate network delay
+        });
     };
 
     // Inline styles for the container and border
@@ -66,6 +86,11 @@ function SignUp() {
             marginBottom: '15px',
             textAlign: 'center',
         },
+        message: {
+            color: 'green',
+            marginBottom: '15px',
+            textAlign: 'center',
+        },
         paragraph: {
             textAlign: 'center',
         },
@@ -77,6 +102,7 @@ function SignUp() {
                 <div className="col-md-4" style={styles.container}>
                     <h2 style={styles.heading}>Create Account</h2>
                     {error && <div style={styles.error}>{error}</div>}
+                    {message && <div style={styles.message}>{message}</div>}
                     <form onSubmit={handleSubmit}>
                         <div style={styles.formGroup}>
                             <label htmlFor="username" style={styles.label}>Username:</label>

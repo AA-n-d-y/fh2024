@@ -4,20 +4,38 @@ function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [message, setMessage] = useState('');
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
-        // Add your authentication logic here
+        // Simple validation
         if (!email || !password) {
             setError("Email and password are required!");
             return;
         }
 
         setError('');
-        alert("Login successful!");
-        // Here you can add code to send the data to the server
-        // e.g., using fetch() or axios
+
+        // Simulate login processing
+        const loginSuccessful = await simulateLogin();
+
+        if (loginSuccessful) {
+            setMessage("Login successful!");
+            // Reset the form fields
+            setEmail('');
+            setPassword('');
+        } else {
+            setMessage("Login failed. Please try again.");
+        }
+    };
+
+    // Simulate login processing
+    const simulateLogin = () => {
+        return new Promise((resolve) => {
+            const isSuccess = Math.random() > 0.3; // 70% chance of success
+            setTimeout(() => resolve(isSuccess), 1000); // Simulate network delay
+        });
     };
 
     const styles = {
@@ -59,11 +77,18 @@ function Login() {
             cursor: 'pointer',
             fontSize: '16px',
         },
-        buttonHover: {
-            backgroundColor: '#0056b3',
-        },
         error: {
             color: 'red',
+            marginBottom: '15px',
+            textAlign: 'center',
+        },
+        successMessage: {
+            color: 'green', // Message for successful login
+            marginBottom: '15px',
+            textAlign: 'center',
+        },
+        failureMessage: {
+            color: 'red', // Message for failed login
             marginBottom: '15px',
             textAlign: 'center',
         },
@@ -76,6 +101,11 @@ function Login() {
         <div style={styles.container}>
             <h2 style={styles.heading}>Log In</h2>
             {error && <div style={styles.error}>{error}</div>}
+            {message && (
+                <div style={message.includes("failed") ? styles.failureMessage : styles.successMessage}>
+                    {message}
+                </div>
+            )}
             <form onSubmit={handleSubmit}>
                 <div style={styles.formGroup}>
                     <label htmlFor="email" style={styles.label}>Email:</label>
