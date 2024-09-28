@@ -3,12 +3,8 @@ import { NavLink, redirect, useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 
 
-<<<<<<< HEAD
 function Payments({ teleportDetails = {} }) { // Provide a default empty object
     const navigate = useHistory();
-=======
-function Payments({ teleportDetails }) {
->>>>>>> db3dd6f70c769eed231a4bb5dd1cc0e29385d699
     const [cardNumber, setCardNumber] = useState('');
     const [cardHolderName, setCardHolderName] = useState('');
     const [expiryDate, setExpiryDate] = useState('');
@@ -16,7 +12,6 @@ function Payments({ teleportDetails }) {
     const [message, setMessage] = useState('');
     const [isSuccess, setIsSuccess] = useState(null); // true for success, false for failure
 
-<<<<<<< HEAD
     const handleLogin = async () => {
         try {
             const res = await fetch("http://localhost:8080" + "/getLoggedIn", {
@@ -34,8 +29,6 @@ function Payments({ teleportDetails }) {
         handleLogin();
     }, [])
     
-=======
->>>>>>> db3dd6f70c769eed231a4bb5dd1cc0e29385d699
     const handleSubmit = async (event) => {
         event.preventDefault();
 
