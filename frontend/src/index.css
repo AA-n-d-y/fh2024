@@ -5,9 +5,68 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: white;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.teleportal {
+  margin: 1.7em 0 2.1em 0;
+} 
+
+.section-one {
+  background: black;
+  color: white;
+}
+
+.section-two {
+  margin-top: 6em;
+  background-color: dark;
+}
+
+.section-three {
+  margin-top: 11em;
+}
+
+
+.img-1, .img-2 {
+  padding: 0 3em;
+  padding-bottom: 3em;
+}
+
+.img-1, .img-2 {
+  padding: 0 3em;
+}
+
+.img-1 {
+  float: left;
+}
+
+.img-2 {
+  float: right;
+}
+
+p {
+  text-align: justify;
+  font-size: 1.4rem;
+  line-height: 1.5;
+}
+
+.fade {
+  animation: fade-up 1.5s forwards;
+}
+
+@keyframes fade-up {
+  0% {
+      opacity: 0;
+      transform: translateY(-30px) scale(0.9);
+  }
+
+  100% {
+      opacity: 1;
+      transform: translateY(0px) scale(1);
+  }
 }
