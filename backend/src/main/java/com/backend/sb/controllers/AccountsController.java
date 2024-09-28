@@ -31,7 +31,6 @@ public class AccountsController {
     // Post request for creating an account
     @PostMapping("/signup")
     public ResponseEntity<Boolean> createAccount(HttpSession ssn, @RequestBody Account account, HttpServletRequest request, HttpServletResponse response) {
-
         // If the account already exists
         if (repo.findByUsername(account.getUsername()).size() > 0) {
             return new ResponseEntity<>(false, HttpStatus.CONFLICT);
@@ -55,5 +54,17 @@ public class AccountsController {
 
         // Else return false
         return new ResponseEntity<>(false, HttpStatus.UNAUTHORIZED);
+    }
+
+    // Get request for seeing if the user is logged in
+    @GetMapping("/getLogin") 
+    public ResponseEntity<Boolean> isLoggedIn(HttpSession ssn, HttpServletRequest request, HttpServletResponse response) {
+        // If the user's not logged in
+        if (!loggedIn(ssn)) {
+            return new ResponseEntity<>(false, HttpStatus.UNAUTHORIZED);
+        }
+
+        // Else
+        return new ResponseEntity<>(true, HttpStatus.OK);
     }
 }
