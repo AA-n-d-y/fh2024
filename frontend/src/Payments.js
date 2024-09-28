@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Payments() {
+function Payments({ teleportDetails = {} }) { // Provide a default empty object
     const [cardNumber, setCardNumber] = useState('');
     const [cardHolderName, setCardHolderName] = useState('');
     const [expiryDate, setExpiryDate] = useState('');
@@ -47,6 +47,16 @@ function Payments() {
     return (
         <div style={styles.container}>
             <h2 style={styles.heading}>Payment Information</h2>
+            {/* Display teleportation info summary */}
+            <div style={styles.teleportationSummary}>
+                <h3 style={styles.summaryHeading}>Teleportation Summary</h3>
+                <div><strong>Teleport Time:</strong> {teleportDetails.teleportTime || 'N/A'}</div>
+                <div><strong>Origin:</strong> {teleportDetails.origin || 'N/A'}</div>
+                <div><strong>Destination:</strong> {teleportDetails.destination || 'N/A'}</div>
+                <div><strong>Price (Economy):</strong> {teleportDetails.price?.economy || 'N/A'}</div>
+                <div><strong>Price (Business):</strong> {teleportDetails.price?.business || 'N/A'}</div>
+                <div><strong>Details:</strong> {teleportDetails.details || 'N/A'}</div>
+            </div>
             {message && (
                 <div style={{ ...styles.message, color: isSuccess ? 'green' : 'red' }}>
                     {message}
@@ -111,6 +121,16 @@ const styles = {
     heading: {
         textAlign: 'center',
         marginBottom: '20px',
+    },
+    teleportationSummary: {
+        marginBottom: '20px',
+        padding: '10px',
+        border: '1px solid #e0e0e0',
+        borderRadius: '5px',
+        backgroundColor: '#f9f9f9',
+    },
+    summaryHeading: {
+        marginBottom: '10px',
     },
     form: {
         display: 'flex',

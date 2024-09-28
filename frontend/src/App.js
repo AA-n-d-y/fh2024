@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Payments from "./Payments";
 import Login from "./Login";
 import SignUp from "./SignUp";
+import TeleportResults from "./TeleportResults";
 
 function App() {
     return (
@@ -30,6 +31,11 @@ function App() {
               <SignUp>
 
               </SignUp>
+            </Route>
+			<Route path="/teleportresults">
+              <TeleportResults>
+
+              </TeleportResults>
             </Route>
           </Switch>
         </div>
