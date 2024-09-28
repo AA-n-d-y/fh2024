@@ -1,0 +1,25 @@
+package com.backend.sb.controllers;
+
+import com.backend.sb.models.Planet;
+import com.backend.sb.services.PlanetService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class PlanetController {
+
+    @Autowired
+    private PlanetService planetService;
+
+    // Endpoint to get planets based on name and distance range
+    @GetMapping("/api/planets")
+    public Planet[] getPlanets(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Double minDistance,
+            @RequestParam(required = false) Double maxDistance) {
+
+        return planetService.getPlanets(name, minDistance, maxDistance);
+    }
+}
