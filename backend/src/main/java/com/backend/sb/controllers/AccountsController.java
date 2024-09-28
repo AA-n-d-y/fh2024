@@ -15,9 +15,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.Map;
 import org.springframework.web.bind.annotation.RequestBody;
+import java.util.List;
 
 
-@CrossOrigin(origins = "http://localhost:3000") 
 @RestController
 public class AccountsController {
     @Autowired 
@@ -44,16 +44,20 @@ public class AccountsController {
 
     // Post request for logging in
     @PostMapping("/login") 
-    public ResponseEntity<Boolean> loggingIn(HttpSession ssn, @RequestParam Map<String, String> form, HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<Boolean> loggingIn(HttpSession ssn, @RequestBody Account acc, HttpServletRequest request, HttpServletResponse response) {
         // If the user's details match, log them in and set the session
-        Account account = repo.findByUsernameAndPassword(form.get("email"), form.get("password")).get(0);
-        if (account != null) {
-            request.getSession().setAttribute("accountUser", account);
+        System.out.println(acc.getEmail());
+        List<Account> accounts = repo.findByEmailAndPassword(acc.getEmail(), acc.getPassword());
+        System.out.println(accounts.get(0).getEmail());
+        if (!accounts.isEmpty()) {
+            request.getSession().setAttribute("accountUser", accounts.get(0));
             return new ResponseEntity<>(true, HttpStatus.OK);
         }
 
         // Else return false
-        return new ResponseEntity<>(false, HttpStatus.UNAUTHORIZED);
+        else {
+            return new ResponseEntity<>(false, HttpStatus.UNAUTHORIZED);
+        }
     }
 
     // Get request for seeing if the user is logged in

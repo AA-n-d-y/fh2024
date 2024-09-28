@@ -1,8 +1,27 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useEffect } from 'react';
 
 function TeleportationResults() {
+    const navigate = useHistory();
     const buttonColor = '#007BFF'; // Define the button color here
+
+    const handleLogin = async () => {
+        try {
+            const res = await fetch("http://localhost:8080" + "/getLoggedIn", {
+              method: "GET"
+            });
+    
+            // If the user is not logged in, redirect to login
+            if (!(res.status == 200)) {
+                navigate.push("/login");
+            }
+        }    
+        catch (error) {}
+    };
+    useEffect(() => {
+        handleLogin();
+    }, [])
 
     const sampleTeleportations = [
         {
