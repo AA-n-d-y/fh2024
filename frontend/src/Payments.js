@@ -3,8 +3,12 @@ import { NavLink, redirect, useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 
 
+<<<<<<< HEAD
 function Payments({ teleportDetails = {} }) { // Provide a default empty object
     const navigate = useHistory();
+=======
+function Payments({ teleportDetails }) {
+>>>>>>> db3dd6f70c769eed231a4bb5dd1cc0e29385d699
     const [cardNumber, setCardNumber] = useState('');
     const [cardHolderName, setCardHolderName] = useState('');
     const [expiryDate, setExpiryDate] = useState('');
@@ -12,6 +16,7 @@ function Payments({ teleportDetails = {} }) { // Provide a default empty object
     const [message, setMessage] = useState('');
     const [isSuccess, setIsSuccess] = useState(null); // true for success, false for failure
 
+<<<<<<< HEAD
     const handleLogin = async () => {
         try {
             const res = await fetch("http://localhost:8080" + "/getLoggedIn", {
@@ -29,6 +34,8 @@ function Payments({ teleportDetails = {} }) { // Provide a default empty object
         handleLogin();
     }, [])
     
+=======
+>>>>>>> db3dd6f70c769eed231a4bb5dd1cc0e29385d699
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -71,12 +78,13 @@ function Payments({ teleportDetails = {} }) { // Provide a default empty object
             {/* Display teleportation info summary */}
             <div style={styles.teleportationSummary}>
                 <h3 style={styles.summaryHeading}>Teleportation Summary</h3>
-                <div><strong>Teleport Time:</strong> {teleportDetails.teleportTime || 'N/A'}</div>
-                <div><strong>Origin:</strong> {teleportDetails.origin || 'N/A'}</div>
-                <div><strong>Destination:</strong> {teleportDetails.destination || 'N/A'}</div>
-                <div><strong>Price (Economy):</strong> {teleportDetails.price?.economy || 'N/A'}</div>
-                <div><strong>Price (Business):</strong> {teleportDetails.price?.business || 'N/A'}</div>
-                <div><strong>Details:</strong> {teleportDetails.details || 'N/A'}</div>
+                <div><strong>Teleport Time:</strong> {teleportDetails?.teleportTime || 'N/A'}</div>
+                <div><strong>Origin:</strong> {teleportDetails?.origin || 'N/A'}</div>
+                <div><strong>Destination:</strong> {teleportDetails?.destination || 'N/A'}</div>
+                <div><strong>Price (Economy):</strong> {teleportDetails?.price?.economy || 'N/A'}</div>
+                <div><strong>Price (Premium Economy):</strong> {teleportDetails?.price?.premiumEconomy || 'N/A'}</div>
+                <div><strong>Price (Business):</strong> {teleportDetails?.price?.business || 'N/A'}</div>
+                <div><strong>Details:</strong> {teleportDetails?.details || 'N/A'}</div>
             </div>
             {message && (
                 <div style={{ ...styles.message, color: isSuccess ? 'green' : 'red' }}>

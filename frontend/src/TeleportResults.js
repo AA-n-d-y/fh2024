@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 
-function TeleportationResults() {
+function TeleportationResults({ setTeleportDetails }) {
     const navigate = useHistory();
     const buttonColor = '#007BFF'; // Define the button color here
 
@@ -57,9 +57,10 @@ function TeleportationResults() {
 
     const history = useHistory(); // React Router v5 useHistory hook
 
-    const handleRedirect = () => {
+    const handleRedirect = (teleport) => {
         const isLoggedIn = localStorage.getItem("isLoggedIn"); // Check if user is logged in
         if (isLoggedIn) {
+            setTeleportDetails(teleport); // Set selected teleport details
             history.push("/payments"); // Redirect to Payments if logged in
         } else {
             history.push("/login"); // Redirect to Login if not logged in
@@ -146,7 +147,7 @@ function TeleportationResults() {
                                 style={styles.priceText}
                                 onMouseEnter={(e) => (e.currentTarget.style.color = styles.priceTextHover.color)}
                                 onMouseLeave={(e) => (e.currentTarget.style.color = buttonColor)}
-                                onClick={handleRedirect}
+                                onClick={() => handleRedirect(teleport)}
                             >
                                 {teleport.price.economy}
                             </div>
@@ -157,7 +158,7 @@ function TeleportationResults() {
                                 style={styles.priceText}
                                 onMouseEnter={(e) => (e.currentTarget.style.color = styles.priceTextHover.color)}
                                 onMouseLeave={(e) => (e.currentTarget.style.color = buttonColor)}
-                                onClick={teleport.price.premiumEconomy !== '-' ? handleRedirect : null}
+                                onClick={teleport.price.premiumEconomy !== '-' ? () => handleRedirect(teleport) : null}
                             >
                                 {teleport.price.premiumEconomy !== '-' ? teleport.price.premiumEconomy : 'Unavailable'}
                             </div>
@@ -168,7 +169,7 @@ function TeleportationResults() {
                                 style={styles.priceText}
                                 onMouseEnter={(e) => (e.currentTarget.style.color = styles.priceTextHover.color)}
                                 onMouseLeave={(e) => (e.currentTarget.style.color = buttonColor)}
-                                onClick={teleport.price.business !== '-' ? handleRedirect : null}
+                                onClick={teleport.price.business !== '-' ? () => handleRedirect(teleport) : null}
                             >
                                 {teleport.price.business !== '-' ? teleport.price.business : 'Unavailable'}
                             </div>
