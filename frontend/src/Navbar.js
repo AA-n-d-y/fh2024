@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPersonRunning } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
 
@@ -12,13 +13,14 @@ function Navbar() {
         </div>
             <ul className="navbar-nav">
                 <li className="nav-item">
-                    <a className="nav-link" href="#" aria-current="page">HOME</a>
+                    <Link to="/" className="nav-link">HOME</Link>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">PAYMENTS</a>
+                    <Link to="/payments" className="nav-link">PAYMENTS</Link>
                 </li>
                 <li>
-                    <a href="#" className="nav-link">LOGIN</a>
+                    <Link to="/login" className="nav-link">LOGINasfsdafaf</Link>
+                    {/* test */}
                 </li>
             </ul>
         </div>
