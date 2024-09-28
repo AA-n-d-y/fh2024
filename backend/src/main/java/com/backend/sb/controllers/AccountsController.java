@@ -14,8 +14,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.Map;
+import org.springframework.web.bind.annotation.RequestBody;
 
-@CrossOrigin(origins = "http://localhost:3000")
+
+@CrossOrigin(origins = "http://localhost:3000") 
 @RestController
 public class AccountsController {
     @Autowired 
@@ -28,18 +30,15 @@ public class AccountsController {
 
     // Post request for creating an account
     @PostMapping("/signup")
-    public ResponseEntity<Boolean> createAccount(HttpSession ssn, @RequestParam Map<String, String> form, HttpServletRequest request, HttpServletResponse response) {
-        String email = form.get("email");
-        String username = form.get("username");
-        String password = form.get("password");
+    public ResponseEntity<Boolean> createAccount(HttpSession ssn, @RequestBody Account account, HttpServletRequest request, HttpServletResponse response) {
 
         // If the account already exists
-        if (repo.findByUsername(username).size() > 0) {
+        if (repo.findByUsername(account.getUsername()).size() > 0) {
             return new ResponseEntity<>(false, HttpStatus.CONFLICT);
         }
         // Else
         else {
-            repo.save(new Account(username, email, password));
+            repo.save(account);
             return new ResponseEntity<>(true, HttpStatus.CREATED);
         }
     }
@@ -48,7 +47,7 @@ public class AccountsController {
     @PostMapping("/login") 
     public ResponseEntity<Boolean> loggingIn(HttpSession ssn, @RequestParam Map<String, String> form, HttpServletRequest request, HttpServletResponse response) {
         // If the user's details match, log them in and set the session
-        Account account = repo.findByUsernameAndPassword(form.get("username"), form.get("password")).get(0);
+        Account account = repo.findByUsernameAndPassword(form.get("email"), form.get("password")).get(0);
         if (account != null) {
             request.getSession().setAttribute("accountUser", account);
             return new ResponseEntity<>(true, HttpStatus.OK);
