@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.Map;
 
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class AccountsController {
     @Autowired 
@@ -48,7 +48,7 @@ public class AccountsController {
     @PostMapping("/login") 
     public ResponseEntity<Boolean> loggingIn(HttpSession ssn, @RequestParam Map<String, String> form, HttpServletRequest request, HttpServletResponse response) {
         // If the user's details match, log them in and set the session
-        Account account = repo.findByUsernameAndPassword(form.get("email"), form.get("password")).get(0);
+        Account account = repo.findByUsernameAndPassword(form.get("username"), form.get("password")).get(0);
         if (account != null) {
             request.getSession().setAttribute("accountUser", account);
             return new ResponseEntity<>(true, HttpStatus.OK);
