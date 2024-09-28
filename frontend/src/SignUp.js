@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
+import { NavLink, redirect, useHistory } from 'react-router-dom';
 
 function SignUp() {
+    const navigate = useHistory();
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         if (password !== confirmPassword) {
@@ -16,9 +18,35 @@ function SignUp() {
         }
 
         setError('');
-        alert("Sign up successful!");
         // Here you can add code to send the data to the server
         // e.g., using fetch() or axios
+
+        try {
+            const res = await fetch("http://localhost:8080" + "/signup", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: 
+              JSON.stringify({
+                username: username,
+                email: email,
+                password: password
+              })
+            });
+
+            // If the account is created, redirect to login
+            if (res.status == 201) {
+                navigate.push("/login");
+            }
+
+            // Else
+            else {
+                setError("Account username already exists")
+            }
+        }
+        
+        catch (error) {}
     };
 
     // Inline styles for the container and border

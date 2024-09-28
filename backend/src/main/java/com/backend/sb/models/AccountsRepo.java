@@ -5,5 +5,5 @@ import java.util.List;
 public interface AccountsRepo extends JpaRepository<Account, Integer>{
     Account findByAccountID(int accountID);    
     List<Account> findByAccountandPassword(String accountName, String password);
-    List<Account> findByAccountName(String accountName);
+    List<Account> findByAccountName(String username);
 }

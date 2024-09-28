@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import { NavLink, redirect, useHistory } from 'react-router-dom';
+
 
 function Login() {
+    const navigate = useHistory();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         // Add your authentication logic here
@@ -15,9 +18,33 @@ function Login() {
         }
 
         setError('');
-        alert("Login successful!");
         // Here you can add code to send the data to the server
         // e.g., using fetch() or axios
+
+        try {
+            const res = await fetch("http://localhost:8080" + "/login", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+            },
+              body: 
+                JSON.stringify({
+                  email: email,
+                  password: password
+                })
+            });
+    
+            // If the login is successful, redirect the user to the home page
+            if (res.status == 200) {
+                navigate.push("/");
+            }
+            // Else, display an error
+            else {
+              setError("Email or password is incorrect");
+            }
+        }
+          
+        catch (error) {}
     };
 
     const styles = {
