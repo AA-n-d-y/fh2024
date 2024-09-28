@@ -19,7 +19,7 @@ function Navbar() {
                     <Link to="/payments" className="nav-link">PAYMENTS</Link>
                 </li>
                 <li>
-                    <Link to="/login" className="nav-link">LOGIN</Link>
+                    <Link to="/login" className="nav-link">LOGINasfsdafaf</Link>
                     {/* test */}
                 </li>
             </ul>
