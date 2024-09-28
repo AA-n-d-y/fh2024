@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
-function Payments({ teleportDetails = {} }) { // Provide a default empty object
+function Payments({ teleportDetails }) {
     const [cardNumber, setCardNumber] = useState('');
     const [cardHolderName, setCardHolderName] = useState('');
     const [expiryDate, setExpiryDate] = useState('');
     const [cvv, setCvv] = useState('');
     const [message, setMessage] = useState('');
     const [isSuccess, setIsSuccess] = useState(null); // true for success, false for failure
-    
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -50,12 +50,13 @@ function Payments({ teleportDetails = {} }) { // Provide a default empty object
             {/* Display teleportation info summary */}
             <div style={styles.teleportationSummary}>
                 <h3 style={styles.summaryHeading}>Teleportation Summary</h3>
-                <div><strong>Teleport Time:</strong> {teleportDetails.teleportTime || 'N/A'}</div>
-                <div><strong>Origin:</strong> {teleportDetails.origin || 'N/A'}</div>
-                <div><strong>Destination:</strong> {teleportDetails.destination || 'N/A'}</div>
-                <div><strong>Price (Economy):</strong> {teleportDetails.price?.economy || 'N/A'}</div>
-                <div><strong>Price (Business):</strong> {teleportDetails.price?.business || 'N/A'}</div>
-                <div><strong>Details:</strong> {teleportDetails.details || 'N/A'}</div>
+                <div><strong>Teleport Time:</strong> {teleportDetails?.teleportTime || 'N/A'}</div>
+                <div><strong>Origin:</strong> {teleportDetails?.origin || 'N/A'}</div>
+                <div><strong>Destination:</strong> {teleportDetails?.destination || 'N/A'}</div>
+                <div><strong>Price (Economy):</strong> {teleportDetails?.price?.economy || 'N/A'}</div>
+                <div><strong>Price (Premium Economy):</strong> {teleportDetails?.price?.premiumEconomy || 'N/A'}</div>
+                <div><strong>Price (Business):</strong> {teleportDetails?.price?.business || 'N/A'}</div>
+                <div><strong>Details:</strong> {teleportDetails?.details || 'N/A'}</div>
             </div>
             {message && (
                 <div style={{ ...styles.message, color: isSuccess ? 'green' : 'red' }}>
