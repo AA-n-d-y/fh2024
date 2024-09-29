@@ -27,7 +27,10 @@ function Home() {
         <section className="section-three fade2">
             <div className="container">
                 <img className="img-2" src="https://placehold.co/400"></img>
-                <p className="description2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<p>
+
+Discover the future of space travel with Galactic Gateway, the pioneering company transforming how we explore the cosmos! Our revolutionary portal system allows you to effortlessly spawn portals right at your location, enabling you to step through and instantly arrive at your desired planetary destination. With cutting-edge technology and a steadfast commitment to safety, we make interplanetary travel not just a dream but an exciting reality for everyone. Join us on this incredible journey, and experience a universe of possibilities where adventure is just a step away!
+				</p>
             </div>
         </section>
         <section>
