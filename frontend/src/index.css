@@ -18,8 +18,13 @@ code {
 } 
 
 .section-one {
-  background: black;
-  color: white;
+    display: table;
+    width: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('portalNY.jpeg');
+    background-position: center -400px; /* Shift the image upwards */
+    background-size: cover; /* Ensure the image covers the entire section */
+    height: 350px;
+    color: white;
 }
 
 .section-two {
