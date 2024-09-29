@@ -1,5 +1,25 @@
+import { useEffect } from 'react';
+import { NavLink, redirect, useHistory } from 'react-router-dom';
 
 function Home() {
+    const navigate = useHistory();
+
+    const handleLogin = async () => {
+        try {
+            const res = await fetch("http://localhost:8080" + "/getLogin", {
+              method: "GET"
+            });
+            console.log(res.status)
+            // If the user is not logged in, redirect to login
+            if (!(res.status == 200)) {
+                navigate.push("/login");
+            }
+        }    
+        catch (error) {}
+    };
+    useEffect(() => {
+        handleLogin();
+    }, [])
     
     return(
         <>

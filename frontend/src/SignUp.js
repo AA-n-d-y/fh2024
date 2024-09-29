@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, redirect, useHistory } from 'react-router-dom';
+import { useEffect } from 'react';
 
 function SignUp() {
     const navigate = useHistory();
@@ -9,6 +10,23 @@ function SignUp() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
+
+    const handleLogin = async () => {
+        try {
+            const res = await fetch("http://localhost:8080" + "/getLogin", {
+              method: "GET"
+            });
+    
+            // If the user is not logged in, redirect to login
+            if (!(res.status == 200)) {
+                navigate.push("/login");
+            }
+        }    
+        catch (error) {}
+    };
+    useEffect(() => {
+        handleLogin();
+    }, [])
 
     const handleSubmit = async (event) => {
         event.preventDefault();

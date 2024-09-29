@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { NavLink, redirect, useHistory } from 'react-router-dom';
+import { useEffect } from 'react';
+
 
 function Login() {
     const navigate = useHistory();
@@ -9,13 +11,22 @@ function Login() {
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
 
+    const handleLogin = async () => {
+        try {
+            const res = await fetch("http://localhost:8080" + "/getLogin", {
+              method: "GET"
+            });
+    
+            // If the user is not logged in, redirect to login
+            if (res.status == 200) {
+                navigate.push("/");
+            }
+        }    
+        catch (error) {}
+    };
     useEffect(() => {
-        // Check if teleportDetails were passed and display them
-        const { teleportDetails } = location.state || {};
-        if (teleportDetails) {
-            alert(`Teleport Details: ${JSON.stringify(teleportDetails)}`); // Show pop-up with teleport details
-        }
-    }, [location.state]);
+        handleLogin();
+    }, [])
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -28,12 +39,17 @@ function Login() {
 
         setError('');
         try {
-            const res = await fetch("http://localhost:8080/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ email, password }),
+            const res = await fetch("http://localhost:8080" + "/login", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+            },
+              body: 
+                JSON.stringify({
+                  username: "",
+                  email: email,
+                  password: password
+                })
             });
 
             // If the login is successful, redirect the user to the home page
