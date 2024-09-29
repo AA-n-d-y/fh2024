@@ -41,6 +41,11 @@ function TeleportationResults({ setTeleportDetails }) {
 
     const history = useHistory(); // React Router v5 useHistory hook
 
+    const handleRedirect = (teleport) => {
+        setTeleportDetails(teleport); // Set selected teleport details
+        history.push("/payments"); // Redirect to Payments if logged in
+    };
+
     const styles = {
         container: {
             maxWidth: '800px',
