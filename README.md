@@ -10,10 +10,10 @@ to their destination faster than the speed of light.
 **Database**: PostgreSQL
 
 ## How to run
-1. Run git clone on the repository: ```https://github.com/AA-n-d-y/fh2024.git``` <br>
-2. To start up the frontend: <br>
+1. Clone the repository by running this in a terminal: ```git clone https://github.com/AA-n-d-y/fh2024.git``` <br>
+2. To start up the frontend, run these commands: <br>
 ```cd frontend```<br>
 ```npm install```<br>
 ```npm run start```<br>
 3. To run the backend: right click the backend file named "SbApplication.java" and click "Run Java" on the file. <br>
-4. The application should be running on port 3000 at ```http://localhost:3000/```
+4. The application should be running on port 3000 at ```http://localhost:3000/``` on the browser
