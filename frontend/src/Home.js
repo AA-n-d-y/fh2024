@@ -34,7 +34,7 @@ Discover the future of space travel with Galactic Gateway, the pioneering compan
             </div>
         </section>
         <section>
-            <h2>Customer Reviews</h2>
+            <h2 className='customer-reviews'>Customer Reviews</h2>
             <div className="reviews">
                 <Card name="edmon" review="amazing"></Card>
                 <Card name="andy" review="wonderful"></Card>
