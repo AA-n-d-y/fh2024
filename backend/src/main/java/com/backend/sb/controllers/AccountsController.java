@@ -46,11 +46,10 @@ public class AccountsController {
     @PostMapping("/login") 
     public ResponseEntity<Boolean> loggingIn(HttpSession ssn, @RequestBody Account acc, HttpServletRequest request, HttpServletResponse response) {
         // If the user's details match, log them in and set the session
-        System.out.println(acc.getEmail());
         List<Account> accounts = repo.findByEmailAndPassword(acc.getEmail(), acc.getPassword());
-        System.out.println(accounts.get(0).getEmail());
         if (!accounts.isEmpty()) {
-            request.getSession().setAttribute("accountUser", accounts.get(0));
+            Account account = accounts.get(0);
+            request.getSession().setAttribute("accountUser", account);
             return new ResponseEntity<>(true, HttpStatus.OK);
         }
 
@@ -69,6 +68,8 @@ public class AccountsController {
         }
 
         // Else
-        return new ResponseEntity<>(true, HttpStatus.OK);
+        else {
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        }
     }
 }
