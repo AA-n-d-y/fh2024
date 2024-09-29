@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 
 function Login() {
     const navigate = useHistory();
+    const location = useLocation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -20,9 +21,6 @@ function Login() {
         }
 
         setError('');
-        // Here you can add code to send the data to the server
-        // e.g., using fetch() or axios
-
         try {
             const res = await fetch("http://localhost:8080" + "/login", {
               method: "POST",
@@ -36,18 +34,17 @@ function Login() {
                   password: password
                 })
             });
-    
+
             // If the login is successful, redirect the user to the home page
-            if (res.status == 200) {
+            if (res.status === 200) {
                 navigate.push("/");
+            } else {
+                setError("Email or password is incorrect");
             }
-            // Else, display an error
-            else {
-              setError("Email or password is incorrect");
-            }
+        } catch (error) {
+            console.error("Login error:", error);
+            setError("An error occurred. Please try again.");
         }
-          
-        catch (error) {}
     };
 
     const styles = {
@@ -95,12 +92,12 @@ function Login() {
             textAlign: 'center',
         },
         successMessage: {
-            color: 'green', // Message for successful login
+            color: 'green',
             marginBottom: '15px',
             textAlign: 'center',
         },
         failureMessage: {
-            color: 'red', // Message for failed login
+            color: 'red',
             marginBottom: '15px',
             textAlign: 'center',
         },
