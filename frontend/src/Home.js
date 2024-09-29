@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { NavLink, redirect, useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
+import Card from './Card';
+
 function Home() {
     const navigate = useHistory();
     
