@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink, redirect, useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
-
+import { useLocation } from 'react-router-dom';
 
 function Payments({ teleportDetails = {} }) { // Provide a default empty object
     const navigate = useHistory();

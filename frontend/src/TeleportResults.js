@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 function TeleportationResults({ setTeleportDetails }) {
     const navigate = useHistory();

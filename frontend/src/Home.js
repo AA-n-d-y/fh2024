@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { NavLink, redirect, useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 function Home() {
     const navigate = useHistory();
