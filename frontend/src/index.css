@@ -14,17 +14,15 @@ code {
 }
 
 .teleportal {
-  margin: 1.7em 0 2.1em 0;
+  justify-content: center;
+  align-items: center;
 } 
 
 .section-one {
-    display: table;
-    width: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('portalNY.jpeg');
-    background-position: center -400px; /* Shift the image upwards */
-    background-size: cover; /* Ensure the image covers the entire section */
-    height: 350px;
-    color: white;
+  background: black;
+  color: white;
+  height: 100vh;
+  place-content: center;
 }
 
 .section-two {
@@ -34,12 +32,6 @@ code {
 
 .section-three {
   margin-top: 11em;
-}
-
-
-.img-1, .img-2 {
-  padding: 0 3em;
-  padding-bottom: 3em;
 }
 
 .img-1, .img-2 {
@@ -54,10 +46,64 @@ code {
   float: right;
 }
 
-p {
+.description, .description2 {
   text-align: justify;
   font-size: 1.4rem;
   line-height: 1.5;
+}
+
+.description {
+  padding-top: 2em;
+}
+
+.description2 {
+  padding-top: 4em;
+}
+
+.reviews {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  border: 1px solid hsl(0, 0%, 80%); 
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.1);
+  padding: 20px;
+  margin: 10px;
+  max-width: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card .card-image {
+  max-width: 60%;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.card .card-title {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  color: hsl(0, 0%, 20%);
+}
+
+.card .card-text {
+  font-family: Arial, sans-serif;
+  color: hsl(0, 0%, 30%);
+}
+
+.reviews {
+  margin: 10px auto 100px 0;
+  width: 100vw;
+}
+
+h2 {
+  margin: 220px 0 0 0;
+  text-align: center;
 }
 
 .fade {

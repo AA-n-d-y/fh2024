@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 
 function Payments({ teleportDetails = {} }) { // Provide a default empty object
     const navigate = useHistory();
+    const [username, setUsername] = useState('');
     const [cardNumber, setCardNumber] = useState('');
     const [cardHolderName, setCardHolderName] = useState('');
     const [expiryDate, setExpiryDate] = useState('');
@@ -16,7 +17,7 @@ function Payments({ teleportDetails = {} }) { // Provide a default empty object
         event.preventDefault();
 
         // Simple validation
-        if (!cardNumber || !cardHolderName || !expiryDate || !cvv) {
+        if (!username || !cardNumber || !cardHolderName || !expiryDate || !cvv) {
             setMessage('Please fill in all fields.');
             setIsSuccess(false);
             return;
@@ -37,6 +38,24 @@ function Payments({ teleportDetails = {} }) { // Provide a default empty object
             setMessage('Payment failed. Please try again.');
             setIsSuccess(false);
         }
+
+        try {
+            const res = await fetch("http://localhost:8080" + "/" + username + "/add", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: 
+              JSON.stringify({
+                username: username,
+                origin: teleportDetails.origin,
+                amount: teleportDetails.premiumEconomy,
+                destination: teleportDetails.destination
+              })
+            });
+        }
+        
+        catch (error) {}
     };
 
     // Simulate payment processing (success or failure)
@@ -68,6 +87,16 @@ function Payments({ teleportDetails = {} }) { // Provide a default empty object
                 </div>
             )}
             <form onSubmit={handleSubmit} style={styles.form}>
+                <div style={styles.formGroup}>
+                    <label style={styles.label}>Username:</label>
+                    <input 
+                        type="text" 
+                        value={username} 
+                        onChange={(e) => setUsername(e.target.value)} 
+                        required 
+                        style={styles.input}
+                    />
+                </div>
                 <div style={styles.formGroup}>
                     <label style={styles.label}>Card Number:</label>
                     <input 
